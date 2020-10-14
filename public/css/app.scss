@@ -18,3 +18,29 @@
         }
     }
 }
+.borderless td, .borderless th {
+    border: none;
+}
+
+.terminar{
+    margin-top: 1em;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10em;
+    &__button{
+        border: 1px solid forestgreen;
+        outline: none;
+        padding: .3em 3em;
+        border-radius: .5em;
+        cursor: pointer;
+        text-decoration: none;
+        color: #000;
+        &:active, &:visited, &:hover{
+            outline: none;
+            text-decoration: none;
+            color: #000;
+        }
+    }
+}

@@ -31,4 +31,43 @@
 .navbar__item:hover {
   text-decoration: none;
 }
+
+.borderless td, .borderless th {
+  border: none;
+}
+
+.terminar {
+  margin-top: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 10em;
+          column-gap: 10em;
+}
+
+.terminar__button {
+  border: 1px solid forestgreen;
+  outline: none;
+  padding: .3em 3em;
+  border-radius: .5em;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+}
+
+.terminar__button:active, .terminar__button:visited, .terminar__button:hover {
+  outline: none;
+  text-decoration: none;
+  color: #000;
+}
 /*# sourceMappingURL=app.css.map */

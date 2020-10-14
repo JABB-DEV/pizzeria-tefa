@@ -11,15 +11,15 @@
                     <div class="form-group">
                         <select id="masa" class="form-control">
                             <option value="">Selecciona la masa</option>
-                            <option value="1">Masa original</option>
+                            <option value="Masa original">Masa original</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <select id="size" class="form-control">
                             <option value="">Selecciona el tamaño</option>
-                            <option value="mediana">Mediana</option>
-                            <option value="grande">Grande</option>
-                            <option value="mediana">Gigante</option>
+                            <option value="Mediana">Mediana</option>
+                            <option value="Grande">Grande</option>
+                            <option value="Gigante">Gigante</option>
                         </select>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
         let masa = document.getElementById('masa').value
         let size = document.getElementById('size').value
         if(masa !="" && size !='' ){
-        let data = `_token=${document.querySelector("input[name='_token']").value}&id=${document.getElementById('id').value}&cantidad=${document.getElementById('counter').innerHTML}&size=${size}&masa=${size}`
+        let data = `_token=${document.querySelector("input[name='_token']").value}&id=${document.getElementById('id').value}&cantidad=${document.getElementById('counter').innerHTML}&size=${size}&masa=${masa}`
         fetch(url, {
             method: 'POST',
             headers: {

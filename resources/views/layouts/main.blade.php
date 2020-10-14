@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pizzeria Tefa</title>
 <link rel="stylesheet" href="{{asset('css/bootstrap/css/bootstrap.min.css')}}">
-<link rel="stylesheet" href="{{asset('css/app.css')}}">
 <script src="{{ asset('css/fontawsome/js/all.min.js') }}"></script>
+<link rel="stylesheet" href="{{asset('css/app.css')}}">
+<link rel="stylesheet" href="{{asset('css/tagify/tagify.css')}}">
 </head>
 <body>
     @include('layouts.partials.header')
@@ -18,6 +19,9 @@
 
     @include('layouts.partials.footer')
 
+    <script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
+    <script src="{{asset('css/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('css/tagify/jQuery.tagify.min.js')}}"></script>
     @yield('scripts')
 </body>
 </html>
