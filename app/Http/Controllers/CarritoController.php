@@ -9,6 +9,7 @@ class CarritoController extends Controller
    }
    public function clear(){
     \Cart::clear();
+    \Cache::flush();
     return redirect('productos');
    }
    public function destroy(){

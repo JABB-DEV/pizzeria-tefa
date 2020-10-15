@@ -7,15 +7,15 @@
     <div class="row">
         <div class="col-md-4">
                 <label for="cp">Codigo Postal: </label>
-                <input type="text" name="cp" id="cp" class="form-control">
+                <input type="text" name="cp" id="cp" class="form-control" required>
         </div>
         <div class="col-md-4">
             <label for="colonia">Colonia: </label>
-            <input type="text" name="colonia" id="colonia" class="form-control">
+            <input type="text" name="colonia" id="colonia" class="form-control" required>
         </div>
         <div class="col-md-4">
             <label for="calle">Calle: </label>
-            <input type="text" name="calle" id="calle" class="form-control">
+            <input type="text" name="calle" id="calle" class="form-control" required>
         </div>
     </div>
     <div class="row mt-2">
@@ -25,7 +25,7 @@
         </div>
         <div class="col-md-2">
             <label for="numero_i">N&uacute;mero Interior: </label>
-            <input type="text" name="numero_i" id="numero_i" class="form-control">
+            <input type="text" name="numero_i" id="numero_i" class="form-control" required>
         </div>
         <div class="col-md-2">
             <label for="numero_e">N&uacute;mero Exterior:</label>
@@ -35,7 +35,7 @@
     <div class="row mt-2">
         <div class="col-md-4">
                 <label for="telefono">Tel&eacute;fono</label>
-                <input type="text" name="telefono" id="telefono" class="form-control">
+                <input type="text" name="telefono" id="telefono" class="form-control" required>
         </div>
         <div class="col-md-2">
             <label for="ext">Estensi&oacute;n </label>

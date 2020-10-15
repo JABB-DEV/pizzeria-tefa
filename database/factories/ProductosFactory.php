@@ -21,10 +21,11 @@ class ProductosFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->text,
+            'nombre' => $this->faker->word,
             'ingredientes' => $this->faker->word.", ".$this->faker->word,
             'precio' => $this->faker->numberBetween($min = 100, $max = 200),
             'existencias' => $this->faker->numberBetween($min = 1, $max = 100),
+            'url' => 'images/pizza.jpg'
         ];
     }
 }

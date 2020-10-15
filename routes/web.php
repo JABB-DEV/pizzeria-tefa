@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Productos;
-use Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver;
 
 Route::get('/', function () {
-    return view('home');
+    return redirect()->route('productos.index');
 });
 
 Route::resource('/productos', "ProductosController");
@@ -28,15 +27,35 @@ Route::post('add', function(){
         )
     );
     \Cart::add($productoCart);
-    return redirect('productos');
 });
-// Route::get('cart', "CarritoController@index");
-// Route::post('delete', "CarritoController@delete");
+
 Route::get('cart/clear', "CarritoController@clear")->name('cart.clear');
+
 Route::resource('cart', "CarritoController");
+
 Route::get('/comprar', function(){
-    return view('carrito.terminar');
+    if(Cache::has('domicilio')){
+        $domicilio = \Cache::get('domicilio');
+        return view("carrito.finaliza", compact('domicilio'));
+     }else{
+         return view('carrito.terminar');
+     }
 })->name('seguir.comprando');
+
 Route::post('/comprar', function(){
-    return request();
+    $form = request()->except('_token');
+    \Cache::put('domicilio', $form, 600);
+    $domicilio = \Cache::get('domicilio');
+    return view("carrito.finaliza", compact('domicilio'));
 })->name('comprar.guardar');
+
+Route::post('carrito/{id}', function($id){
+    Cart::update($id, array(
+        'quantity' => array(
+            'relative' => false,
+            'value' => request('cantidad')
+        )
+      ));
+});
+
+Route::resource('adicionales', 'AdicionalesController');

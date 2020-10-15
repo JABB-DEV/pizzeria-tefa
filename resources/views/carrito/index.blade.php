@@ -3,10 +3,11 @@
 @section('content')
     <div class="d-flex justify-content-around mt-2 p-2">
         <span class="h4">Revisa y modifica tus productos</span>
-        <a href="http://" class="btn btn-primary">Agregar adicionales</a>
+        <a href="{{route('adicionales.index')}}" class="btn btn-primary">Agregar adicionales</a>
     </div>
     @if (count(Cart::getContent()))
     <div class="card" style="border: 1px solid forestgreen;">
+        @csrf
         <div class="card-body">
             @foreach (Cart::getContent() as $item)
             <p class="h5">{{$item->name}}</p>
@@ -23,7 +24,13 @@
                 <tbody>
                     <tr>
                         <td style="border: 1px solid forestgreen;"><small class="text-muted"> Pizza {{$item->attributes->size}}, {{$item->attributes->masa}} {{$item->name}} {{$item->attributes->ingredientes}} </small></td>
-                        <td class="text-center"><small class="text-muted">{{ $item->quantity }}</small></td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center mt-2">
+                                <p class="contador"><i class="fas fa-plus" onclick="plus('counter_{{$loop->iteration}}')" style="cursor: pointer;"></i> 
+                                <span id="counter_{{$loop->iteration}}" class="">{{ $item->quantity }}</span>
+                                    <i class="fas fa-minus" onclick="minus('counter_{{$loop->iteration}}')" style="cursor: pointer;"></i></p>
+                            </div>
+                        </td>
                         <td class="text-center"><small class="text-muted">{{$item->price}}</small></td>
                         <td><form action="{{url('cart/'.$item->id.'')}}" method="POST" class="form-inline">
                             @csrf
@@ -31,7 +38,7 @@
                             <small class="text-muted">
                             <input type="hidden" name="id" value="{{$item->id}}">
                             <button type="submit" class="btn" title="Eliminar producto del carrito"><i class="fa fa-minus"></i></button>
-                            <a href="" class="btn"><i class="fa fa-edit"></i></a>
+                            <a href="javascript:mandar('{{url('/carrito/'.$item->id)}}', 'counter_{{$loop->iteration}}')" class="btn" title="Editar producto del carrito"><i class="fa fa-edit"></i></a>
                             </small>
                         </form>
                     </td>
@@ -58,7 +65,35 @@
     </div>
 @endsection
 @section('scripts')
-<script>
-    $('[name=tags]').tagify();
-</script>
+    <script type="text/javascript">
+    const plus = span => {
+        let counter = document.getElementById(span)
+        let con = parseInt(counter.innerHTML)
+        if( con >= 1){
+            con++
+            counter.innerHTML = con
+        }
+    }
+    const minus = span => {
+        let counter = document.getElementById(span)
+        let con = parseInt(counter.innerHTML)
+        if( con > 1){
+            con--
+            counter.innerHTML = con
+        }
+    }
+    const mandar = (url, counter) =>{
+        let data = `_token=${document.querySelector("input[name='_token']").value}&cantidad=${document.getElementById(counter).innerHTML}`
+        fetch(url, {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data,
+        })
+        .then( response => {
+            location.reload()
+        })
+    }
+    </script>
 @endsection
