@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DetalleVentas;
 use App\Models\Domicilios;
 use App\Models\Ventas;
-use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class VentasController extends Controller
 {
@@ -33,10 +33,17 @@ class VentasController extends Controller
            }
            \Cart::clear();
             \Cache::flush();
-           return redirect()->route('ventas.pdf')->with($venta->id);
+           return redirect()->route('ventas.pdf', $venta->id);
         }
     }
     public function pdf($id){
-        return $id;
+        $venta = Ventas::findOrFail($id);
+        $domicilio = Domicilios::findOrFail($venta->id_domicilio);
+        $productos = DetalleVentas::select('detalle_ventas.cantidad as cantidad_venta', 'productos.*')
+        ->join('productos', 'detalle_ventas.id_producto', '=', 'productos.id')
+        ->where('id_venta', '=', $id)
+        ->get();
+        $pdf =  PDF::loadView('ventas.pdf',  compact(['domicilio', 'productos', 'venta']));
+        return $pdf->stream();
     }
 }

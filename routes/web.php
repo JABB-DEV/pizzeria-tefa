@@ -14,7 +14,7 @@ Route::get('/ordena/{id}', function($id){
     return view('productos.ordena', compact('producto'));
 });
 
-Route::get('pdf/{id}', 'VentasController@pdf');
+Route::get('pdf/{id}', 'VentasController@pdf')->name('ventas.pdf');
 
 Route::post('add', function(){
     $producto = Productos::find(request('id'));
