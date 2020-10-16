@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdicionalesTable extends Migration
+class CreateDetalleVentasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateAdicionalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('adicionales', function (Blueprint $table) {
+        Schema::create('detalle_ventas', function (Blueprint $table) {
             $table->id();
-            $table->text('nombre');
-            $table->decimal('precio');
-            $table->integer('existencias');
-            $table->integer('refresco');
-            $table->text('url');
+            $table->integer('id_venta');
+            $table->integer('id_producto');
+            $table->integer('cantidad');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateAdicionalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adicionales');
+        Schema::dropIfExists('detalle_ventas');
     }
 }

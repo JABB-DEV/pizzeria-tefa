@@ -11,7 +11,7 @@
         <div class="card-body">
             @foreach (Cart::getContent() as $item)
             <p class="h5">{{$item->name}}</p>
-            <small class="text-muted">Ingredientes: {{$item->attributes->ingredientes}}</small>
+            @if(!$item->attributes->has('adicional')) <small class="text-muted">Ingredientes: {{ ($item->attributes->ingredientes) ? $item->attributes->ingredientes : "Sin ingredientes"}}</small>@endif
             <table class="table borderless">
                <thead>
                    <tr>
@@ -23,7 +23,11 @@
                 </thead> 
                 <tbody>
                     <tr>
-                        <td style="border: 1px solid forestgreen;"><small class="text-muted"> Pizza {{$item->attributes->size}}, {{$item->attributes->masa}} {{$item->name}} {{$item->attributes->ingredientes}} </small></td>
+                        <td style="border: 1px solid forestgreen;">
+                            <small class='text-muted'>
+                                    {{  (!$item->attributes->has('adicional')) ? "Pizza ".$item->attributes->size.", ".$item->attributes->masa." ".$item->name." ".$item->attributes->ingredientes : "".$item->name }}
+                            </small>
+                        </td>
                         <td class="text-center">
                             <div class="d-flex justify-content-center mt-2">
                                 <p class="contador"><i class="fas fa-plus" onclick="plus('counter_{{$loop->iteration}}')" style="cursor: pointer;"></i> 
@@ -49,6 +53,11 @@
             @endforeach
         </div>
     </div>
+    <div class="d-flex flex-column align-items-end mt-2 p-2">
+        <p class="mark">Subtotal: <span class="small text-muted">{{Cart::getSubtotal()}}</span></p>
+            <p class="mark">IVA: <span class="small text-muted"> {{Cart::getSubtotal()*.16}}</span></p>
+            <p class="mark">Total: <span class="small text-muted">{{Cart::getSubtotal()*1.16}}</span></p>
+        </div>
             <div class="d-flex justify-content-around mt-2 p-2">
                 <a href="{{route('cart.clear')}}" class="btn btn-danger">Vaciar carrito</a>
                 <a href="{{url('productos')}}" class="btn btn-primary">Seguir comprando</a>

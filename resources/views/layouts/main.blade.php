@@ -9,9 +9,11 @@
 <script src="{{ asset('css/fontawsome/js/all.min.js') }}"></script>
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
 <link rel="stylesheet" href="{{asset('css/tagify/tagify.css')}}">
+@yield('styles')
 </head>
 <body>
     @include('layouts.partials.header')
+    @include('layouts.partials.message')
     
     <div class="container">
         @yield('content')
